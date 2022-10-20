@@ -14,6 +14,7 @@ import java.util.List;
 public class PratoController {
     @Autowired
     private PratoRepository repository;
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
     @GetMapping(path = "/admin/pratos")
     public List<PratoModel> todosCadastrados() {
         return (List<PratoModel>) repository.findAll();

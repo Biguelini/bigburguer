@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d33b5e1-4ce5-4c74-8296-b785fb7608e9" name="Changes" comment="" />
+    <list default="true" id="4d33b5e1-4ce5-4c74-8296-b785fb7608e9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/GarcomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/GarcomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PratoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PratoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/components/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/components/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/pages/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/pages/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,6 +29,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -30,18 +44,19 @@
     </option>
   </component>
   <component name="ProjectId" id="2GJigUmyNDmFo2LGr6kadgNbcBL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/2info2021/Desktop/admin",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/2info2021/Desktop/admin&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="AdminApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bigburguer.admin.AdminApplication" />
@@ -72,5 +87,16 @@
       <updated>1666113201054</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

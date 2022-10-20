@@ -1,15 +1,14 @@
-import { Link } from 'react-router-dom'
 import React from 'react'
-
+import './Header.css'
 export function Header() {
     return (
         <header>
             <h1>BigBurguer</h1>
             <nav>
                 <ul>
-                    <li><Link>Lanches</Link></li>
-                    <li><Link>Garçons</Link></li>
-                    <li><Link>Pedidos</Link></li>
+                    <li>Lanches</li>
+                    <li>Garçons</li>
+                    <li>Pedidos</li>
                 </ul>
             </nav>
         </header>
