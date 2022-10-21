@@ -47,6 +47,7 @@ public class GarcomController {
                     g.setLogin(garcom.getLogin());
                     g.setSenha(garcom.getSenha());
                     g.setTelefone(garcom.getTelefone());
+                    g.setCargo(garcom.getCargo());
                     return repository.save(g);
                 })
                 .orElseGet(() -> {

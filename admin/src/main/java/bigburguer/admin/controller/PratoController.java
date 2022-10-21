@@ -19,6 +19,7 @@ public class PratoController {
     public List<PratoModel> todosCadastrados() {
         return (List<PratoModel>) repository.findAll();
     }
+    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
     @PostMapping(path = "/admin/pratos")
     public PratoModel salvar(@RequestBody @NotNull PratoModel prato) {
         for (PratoModel p : repository.findAll()) {

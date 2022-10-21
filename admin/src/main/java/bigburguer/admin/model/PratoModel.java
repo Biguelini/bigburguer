@@ -1,13 +1,12 @@
 package bigburguer.admin.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "prato")
 public class PratoModel {
     @Id
-    private Integer id = 0;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(nullable = false, length = 100)
     private String nome;
     @Column(nullable = false, length = 10)

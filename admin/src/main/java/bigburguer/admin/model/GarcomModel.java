@@ -1,14 +1,13 @@
 package bigburguer.admin.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.InputMismatchException;
 
 @Entity(name = "garcom")
 public class GarcomModel {
     @Id
-    private Integer id = 0;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(nullable = false, length = 100)
     private String nome;
     @Column(nullable = false, length = 100)
@@ -19,6 +18,16 @@ public class GarcomModel {
     private String cpf;
     @Column(nullable = false, length = 100)
     private String telefone;
+    @Column(nullable = false, length = 100)
+    private String cargo;
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 
     public Integer getId() {
         return id;
