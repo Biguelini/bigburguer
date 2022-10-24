@@ -61,4 +61,17 @@ public class GarcomController {
     void delete(@PathVariable Integer id) {
         repository.deleteById(id);
     }
+
+    @PostMapping(path = "/garcom/login")
+    public ResponseEntity login(@RequestBody @NotNull GarcomModel garcom) {
+        for (GarcomModel g : repository.findAll()) {
+            if (g.getLogin().equals(garcom.getLogin())) {
+                if (g.getSenha().equals((garcom.getSenha()))) {
+                    return ResponseEntity.ok().body("ok");
+                }
+
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
