@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Pratos.css'
 import axios from 'axios'
 
-import { FaPlus, FaTrash,FaPen } from 'react-icons/fa'
+import { FaPlus, FaTrash, FaPen, FaTimes } from 'react-icons/fa'
 export function Pratos() {
     const [pratos, setPratos] = useState([])
     const [isActive, setIsActive] = useState(false)
@@ -29,6 +29,9 @@ export function Pratos() {
                 return console.log(e)
             })
     }
+    const closeForm = () => {
+        setIsActive((current) => !current)
+    }
     const changeNome = (e) => {
         setNome(e.target.value)
     }
@@ -46,7 +49,7 @@ export function Pratos() {
     }, [pratos])
     return (
         <>
-            <table className='pratos'>
+            <table className="pratos">
                 <caption>Pratos</caption>
                 <thead>
                     <tr>
@@ -61,14 +64,20 @@ export function Pratos() {
                             <tr key={prato.id}>
                                 <td data-label="Nome">{prato.nome}</td>
                                 <td data-label="Preço">{prato.preco}</td>
-                                <td data-label="Ações"><FaTrash/><FaPen/></td>
+                                <td data-label="Ações">
+                                    <FaTrash />
+                                    <FaPen />
+                                </td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
             <form className={isActive ? 'formPrato active' : 'formPrato'}>
-                <h3>Adicionar Prato</h3>
+                <div className="title">
+                    <h3>Adicionar Funcionário</h3>
+                    <FaTimes className="closeButtonForm" onClick={closeForm} />
+                </div>
                 <label htmlFor="nome">Nome</label>
                 <input type="text" value={nome} onChange={changeNome} />
                 <label htmlFor="preco">Preço</label>
