@@ -11,16 +11,18 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class GarcomController {
 
     @Autowired
     private GarcomRepository repository;
-    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+
+
     @GetMapping(path = "/admin/garcom")
     public List<GarcomModel> todosCadastrados() {
         return (List<GarcomModel>) repository.findAll();
     }
-    @CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "Requestor-Type", exposedHeaders = "X-Get-Header")
+
     @GetMapping(path = "/admin/garcom/{id}")
     public ResponseEntity consultar(@PathVariable("id") Integer id) {
         return repository.findById(id)

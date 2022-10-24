@@ -1,7 +1,7 @@
 body{
     background: var(--black);
 }
-table {
+table.funcionarios {
     
     width: 60%;
     margin: 0 auto;
@@ -11,50 +11,44 @@ table {
     table-layout: fixed;
 }
 
-table caption {
+table.funcionarios caption {
     margin: 1rem 0;
     font-size: 2rem;
     font-weight: 600;
     letter-spacing: 0.055rem;
     text-align: center;
 }
-table thead {
+table.funcionarios thead {
     border-radius: 24px 24px 0 0;
 }
-table thead tr {
+table.funcionarios thead tr {
     color: var(--black);
     font-weight: bold;
     background-color: var(--yellow);
     font-size: 1rem;
 }
 
-table tbody tr {
+table.funcionarios tbody tr {
     background-color: #191919;
 }
 
 
-table th {
+table.funcionarios th {
     letter-spacing: 0.075rem;
 }
-table th:first-child {
+table.funcionarios th:first-child {
     border-radius: 24px 0 0 0;
 }
-table th:last-child {
+table.funcionarios th:last-child {
     border-radius: 0 24px 0 0;
 }
 
-table th,
-table td {
+table.funcionarios th,
+table.funcionarios td {
     padding: 1rem 1rem;
     text-align: center;
 }
 
-table tr:last-child td:first-child{ 
-    border-radius: 0 0 0 24px;
-}
-table tr:last-child td:last-child{ 
-    border-radius: 0 0 24px 0 ;
-}
 .formFuncionario + .addButton{
     width: 64px;
     height: 64px;
@@ -113,7 +107,18 @@ table tr:last-child td:last-child{
     background-color: var(--black);
     transition: background .2s;
 }
-
+.formFuncionario select {
+    width: 78%;
+    height: 56px;
+    border: none;
+    border-radius: 500px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 4px solid var(--yellow);
+    color: var(--white);
+    background-color: var(--black);
+    transition: background .2s;
+}
 .formFuncionario div{
     display: flex;
     flex-direction: column;
@@ -127,24 +132,37 @@ table tr:last-child td:last-child{
 .formFuncionario div:not(:nth-last-child(-n+2)){
     margin-bottom: 12px;
 }
-.formFuncionario input:focus{
+.formFuncionario input:focus, .formFuncionario select:focus{
+
     background-color: #191919;
     outline: 0;
 }
 .formFuncionario h3{
     text-align: center;
-    grid-area: title;
     font-size: 1.5rem;
     margin: 0 0 24px;
     padding: 0;
 }
+.formFuncionario .title{
+    grid-area: title;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.closeButtonForm{
+    position: absolute;
+    right: 28px;
+    top: 28px;
+    font-size: 1.75rem
+}
 @media screen and (max-width: 768px) {
 
-    table {
+    table.funcionarios {
         border: none;
     }
 
-    table caption {
+    table.funcionarios caption {
+        margin: 0;
         padding: 0.75rem 1rem;
         border-radius: 6px 6px 0 0;
         font-size: 1.5rem;
@@ -152,7 +170,7 @@ table tr:last-child td:last-child{
         color: var(--black);
     }
 
-    table thead {
+    table.funcionarios thead {
         position: absolute;
         width: 1px;
         height: 1px;
@@ -160,18 +178,18 @@ table tr:last-child td:last-child{
         overflow: hidden;
     }
 
-    table tbody tr {
+    table.funcionarios tbody tr {
         margin-bottom: 1rem;
         display: block;
     }
 
-    table td {
+    table.funcionarios td {
         font-size: 0.875rem;
         text-align: right;
         display: block;
     }
 
-    table td:before {
+    table.funcionarios td:before {
         content: attr(data-label);
         font-size: 0.75rem;
         font-weight: 600;
@@ -181,7 +199,7 @@ table tr:last-child td:last-child{
         opacity: 0.5;
     }
 
-    table td:not(:last-child) {
+    table.funcionarios td:not(:last-child) {
         border-bottom: 1px solid var(--insideBorderColor);
     }
 }

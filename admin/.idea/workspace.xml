@@ -8,14 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/GarcomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/GarcomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PratoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PratoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/model/GarcomModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/model/GarcomModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/model/PratoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/model/PratoModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admincliente/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admincliente/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/components/Header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admincliente/src/components/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/components/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admincliente/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admincliente/src/pages/Home.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../admincliente/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/pages/Garcons.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/pages/Garcons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/pages/Garcons.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/pages/Garcons.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/pages/Pratos.css" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/pages/Pratos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../admincliente/src/pages/Pratos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../admincliente/src/pages/Pratos.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

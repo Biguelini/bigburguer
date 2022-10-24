@@ -46,7 +46,7 @@ export function Pratos() {
     }, [pratos])
     return (
         <>
-            <table>
+            <table className='pratos'>
                 <caption>Pratos</caption>
                 <thead>
                     <tr>
