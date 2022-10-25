@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4d33b5e1-4ce5-4c74-8296-b785fb7608e9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PedidoController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/model/PedidoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/model/PedidoModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/repository/PedidoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/repository/PedidoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../garcom/lib/controllers/garcom_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../garcom/lib/controllers/garcom_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../garcom/lib/login/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../garcom/lib/login/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../garcom/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../garcom/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../garcom/lib/models/garcom_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../garcom/lib/models/garcom_model.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

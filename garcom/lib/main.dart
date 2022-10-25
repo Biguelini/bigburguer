@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garcom/login/login.dart';
+import 'package:garcom/pedidos/pedidos.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -7,15 +8,16 @@ void main() => runApp(MaterialApp(
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0XFFf77f00),
           brightness: Brightness.dark,
-          surface: const Color(0XFFf77f00),
-          primary: const Color(0XFFf77f00),
-          secondary: const Color(0XFF941b0c),
+          seedColor: const Color(0XFFF56828),
+          primary: const Color(0XFFF56828),
+          surface: const Color(0XFFF56828),
+          secondary: const Color(0XFF11181B),
         ),
       ),
-      initialRoute: '/',
+      initialRoute: '/pedidos',
       routes: {
-        '/': (context) => const Login(),
+        '/login': (context) => const Login(),
+        '/pedidos': (context) => const TablePedidos(),
       },
     ));

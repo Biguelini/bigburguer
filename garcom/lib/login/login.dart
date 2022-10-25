@@ -7,7 +7,6 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:garcom/controllers/garcom_service.dart';
 import 'package:garcom/models/garcom_model.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  Garcom garcom = Garcom("", "");
+  Garcom garcom = Garcom("", "", "", "", "");
   final bool _carregando = true;
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
@@ -30,7 +29,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0XFF010001),
       body: Padding(
         padding: const EdgeInsets.all(32),
         child: Column(
@@ -39,7 +37,7 @@ class _LoginState extends State<Login> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: const Color(0XFF191919),
+                color: Color(0XFF191919),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Padding(
@@ -55,7 +53,6 @@ class _LoginState extends State<Login> {
                         'BigBurguer',
                         style: TextStyle(
                           fontSize: 40,
-                          color: Color(0XFFdfe9e8),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -102,9 +99,9 @@ class _LoginState extends State<Login> {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                            color: Color(0XFF010001),
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
+                            color: const Color(0XFFffffff),
                           ),
                         ),
                       ),
