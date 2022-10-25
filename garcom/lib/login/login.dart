@@ -23,7 +23,9 @@ class _LoginState extends State<Login> {
   Future<void> logar() async {
     garcom.login = _loginController.text;
     garcom.senha = _senhaController.text;
-    return await GarcomService.login(garcom) ? print('não deu') : print('ok');
+    return await GarcomService.login(garcom)
+        ? print('não deu')
+        : Navigator.pushNamed(context, '/pedidos');
   }
 
   @override

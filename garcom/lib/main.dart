@@ -15,7 +15,7 @@ void main() => runApp(MaterialApp(
           secondary: const Color(0XFF11181B),
         ),
       ),
-      initialRoute: '/pedidos',
+      initialRoute: '/login',
       routes: {
         '/login': (context) => const Login(),
         '/pedidos': (context) => const TablePedidos(),
