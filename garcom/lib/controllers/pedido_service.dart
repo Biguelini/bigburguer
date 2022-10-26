@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PedidoService {
-  static const url = "http://192.168.198.118:8080/admin/pedidos";
+  static const url = "http://169.254.68.106:8080/admin/pedidos";
   static Future<List<Pedido>> listaPedidos() async {
     try {
       List<Pedido> listaPedido = [];
