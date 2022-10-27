@@ -10,7 +10,6 @@ void main() => runApp(MaterialApp(
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
           seedColor: const Color(0XFFF56828),
-          primary: const Color(0XFFF56828),
           surface: const Color(0XFFF56828),
           secondary: const Color(0XFF11181B),
         ),

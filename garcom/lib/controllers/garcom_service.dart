@@ -14,10 +14,8 @@ class GarcomService {
         },
         body: jsonEncode(garcom),
       );
-      print(response.statusCode);
       return response.statusCode == 200 ? false : true;
     } catch (e) {
-      print('opa 123');
       throw Exception("Erro ao carregar inserir " + e.toString());
     }
   }
