@@ -30,11 +30,11 @@ public class PedidoModel {
         this.idMesa = idMesa;
     }
 
-    public String getprato() {
+    public String getPrato() {
         return prato;
     }
 
-    public void setprato(String prato) {
+    public void setPrato(String prato) {
         this.prato = prato;
     }
 

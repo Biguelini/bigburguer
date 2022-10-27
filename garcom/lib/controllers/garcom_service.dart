@@ -3,11 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class GarcomService {
-<<<<<<< HEAD
   static const url = "http://192.168.198.118:8080/garcom/login";
-=======
-  static const url = "http://192.168.1.11:8080/garcom/login";
->>>>>>> parent of b2cb107 (Revert "atualizando")
+
   static Future<bool> login(Garcom garcom) async {
     try {
       final response = await http.post(
