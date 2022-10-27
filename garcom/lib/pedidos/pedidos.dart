@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garcom/controllers/pedido_service.dart';
+import 'package:garcom/controllers/prato_service.dart';
 import 'package:garcom/models/pedido_model.dart';
+import 'package:garcom/models/prato_model.dart';
 
 class TablePedidos extends StatefulWidget {
   const TablePedidos({Key? key}) : super(key: key);
@@ -12,7 +14,6 @@ class TablePedidos extends StatefulWidget {
 
 class _TablePedidosState extends State<TablePedidos> {
   List<Map<String, dynamic>> _pedidos = [];
-
   Pedido pedido = Pedido(0, 0, 0, "");
   bool _carregando = true;
   void _listaPedidos() async {
@@ -69,9 +70,10 @@ class _TablePedidosState extends State<TablePedidos> {
                         itemBuilder: (context, index) => Card(
                           margin: const EdgeInsets.all(15),
                           child: ListTile(
-                              title: Text((_pedidos[index]['id']).toString()),
-                              subtitle:
+                              title:
                                   Text((_pedidos[index]['idMesa']).toString()),
+                              subtitle: Text(PratoService.localizaPrato(
+                                  int.parse(_pedidos[index]['idPrato']))),
                               trailing: const SizedBox(
                                 width: 100,
                               )),

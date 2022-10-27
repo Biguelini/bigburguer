@@ -6,6 +6,7 @@ import bigburguer.admin.model.PratoModel;
 import bigburguer.admin.repository.PratoRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,13 @@ public class PratoController {
     @GetMapping(path = "/admin/pratos")
     public List<PratoModel> todosCadastrados() {
         return (List<PratoModel>) repository.findAll();
+    }
+
+    @GetMapping(path = "/admin/pratos/{id}")
+    public ResponseEntity consultar(@PathVariable("id") Integer id) {
+        return repository.findById(id)
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
     }
     @PostMapping(path = "/admin/pratos")
     public PratoModel salvar(@RequestBody @NotNull PratoModel prato) {

@@ -64,6 +64,7 @@ public class GarcomController {
 
     @PostMapping(path = "/garcom/login")
     public ResponseEntity login(@RequestBody @NotNull GarcomModel garcom) {
+        System.out.println("oi");
         for (GarcomModel g : repository.findAll()) {
             if (g.getLogin().equals(garcom.getLogin())) {
                 if (g.getSenha().equals((garcom.getSenha()))) {
