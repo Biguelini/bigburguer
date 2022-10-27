@@ -1,25 +1,25 @@
 class Pedido {
   int? id;
   int? idMesa;
-  int? idPrato;
+  String? prato;
   String? status;
   Pedido(
     this.id,
     this.idMesa,
-    this.idPrato,
+    this.prato,
     this.status,
   );
   Pedido.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     idMesa = json['idMesa'];
-    idPrato = json['idPrato'];
+    prato = json['prato'];
     status = json['status'];
   }
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       "id": id,
       "idMesa": idMesa,
-      "idPrato": idPrato,
+      "prato": prato,
       "status": status,
     };
   }

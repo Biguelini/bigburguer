@@ -13,7 +13,7 @@ class TablePedidos extends StatefulWidget {
 class _TablePedidosState extends State<TablePedidos> {
   List<Map<String, dynamic>> _pedidos = [];
 
-  Pedido pedido = Pedido(0, 0, 0, "");
+  Pedido pedido = Pedido(0, 0, "", "");
   bool _carregando = true;
   void _listaPedidos() async {
     _pedidos = [];
@@ -23,7 +23,7 @@ class _TablePedidosState extends State<TablePedidos> {
         _pedidos.add(<String, dynamic>{
           "id": p.id,
           "idMesa": p.idMesa,
-          "idPrato": p.idPrato,
+          "prato": p.prato,
           "status": p.status
         });
       }
@@ -69,9 +69,9 @@ class _TablePedidosState extends State<TablePedidos> {
                         itemBuilder: (context, index) => Card(
                           margin: const EdgeInsets.all(15),
                           child: ListTile(
-                              title: Text((_pedidos[index]['id']).toString()),
-                              subtitle:
-                                  Text((_pedidos[index]['idMesa']).toString()),
+                              title: Text('Mesa: ' +
+                                  (_pedidos[index]['idMesa']).toString()),
+                              subtitle: Text((_pedidos[index]['prato'])),
                               trailing: const SizedBox(
                                 width: 100,
                               )),

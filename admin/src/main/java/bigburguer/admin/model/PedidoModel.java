@@ -9,8 +9,8 @@ public class PedidoModel {
     private Integer id;
     @Column(nullable = false, length = 11)
     private Integer idMesa;
-    @Column(nullable = false, length = 11)
-    private Integer idPrato;
+    @Column(nullable = false, length = 100)
+    private String prato;
     @Column(nullable = false, length = 25)
     private String status;
 
@@ -30,12 +30,12 @@ public class PedidoModel {
         this.idMesa = idMesa;
     }
 
-    public Integer getIdPrato() {
-        return idPrato;
+    public String getprato() {
+        return prato;
     }
 
-    public void setIdPrato(Integer idPrato) {
-        this.idPrato = idPrato;
+    public void setprato(String prato) {
+        this.prato = prato;
     }
 
     public String getStatus() {
