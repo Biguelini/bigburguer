@@ -66,6 +66,7 @@ public class GarcomController {
     public ResponseEntity login(@RequestBody @NotNull GarcomModel garcom) {
         System.out.println("oi");
         for (GarcomModel g : repository.findAll()) {
+            System.out.println(garcom.getLogin()+ garcom.getSenha());
             if (g.getLogin().equals(garcom.getLogin())) {
                 if (g.getSenha().equals((garcom.getSenha()))) {
                     return ResponseEntity.ok().body("ok");
