@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garcom/controllers/pedido_service.dart';
+import 'package:garcom/controllers/prato_service.dart';
 import 'package:garcom/models/pedido_model.dart';
 import 'package:garcom/models/prato_model.dart';
 
@@ -15,26 +16,11 @@ class _TablePedidosState extends State<TablePedidos> {
   List<Map<String, dynamic>> _pedidosEsperando = [];
   List<Map<String, dynamic>> _pedidosPronto = [];
   List<Map<String, dynamic>> _pedidosEntregue = [];
+  List<Map<String, dynamic>> _pratos = [];
   bool _carregando = true;
   Pedido pedido = Pedido(0, 0, "", "esperando");
   final TextEditingController _mesaController = TextEditingController();
   final TextEditingController _produtoController = TextEditingController();
-  Future<void> pedir() async {
-    telaToPedido();
-    bool inserindo = await PedidoService.insere(pedido);
-    if (inserindo) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Pedido feito com sucesso!'),
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Não foi possível pedir!'),
-      ));
-    }
-    _listaPedidosEsperando();
-    _listaPedidosPronto();
-    _listaPedidosEntregue();
-  }
 
   void telaToPedido() {
     pedido = Pedido(
@@ -43,6 +29,20 @@ class _TablePedidosState extends State<TablePedidos> {
       _produtoController.text,
       "esperando",
     );
+  }
+
+  void _listaPratos() async {
+    _pratos = [];
+    final data = await PratoService.listaPratos();
+    setState(() {
+      for (var p in data) {
+        _pedidosEsperando.add(<String, dynamic>{
+          "id": p.id,
+          "nome": p.nome,
+          "preco": p.preco,
+        });
+      }
+    });
   }
 
   void _listaPedidosEsperando() async {
@@ -93,12 +93,33 @@ class _TablePedidosState extends State<TablePedidos> {
     });
   }
 
+  Future<void> pedir() async {
+    telaToPedido();
+    bool inserindo = await PedidoService.insere(pedido);
+    if (inserindo) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Pedido feito com sucesso!'),
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Não foi possível pedir!'),
+      ));
+    }
+    _carregando = true;
+    _listaPedidosEsperando();
+    _listaPedidosPronto();
+    _listaPedidosEntregue();
+    _mesaController.text = '';
+    _produtoController.text = '';
+  }
+
   @override
   void initState() {
     super.initState();
     _listaPedidosEsperando();
     _listaPedidosPronto();
     _listaPedidosEntregue();
+    _listaPratos();
   }
 
   @override
@@ -109,6 +130,24 @@ class _TablePedidosState extends State<TablePedidos> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: const Text('Pedidos'),
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(
+                Icons.refresh,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _carregando = true;
+                _listaPedidosEsperando();
+                _listaPedidosPronto();
+                _listaPedidosEntregue();
+                _listaPratos();
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Atualizado com sucesso!'),
+                ));
+              },
+            )
+          ],
           bottom: const TabBar(
             indicatorColor: Colors.white,
             tabs: [
@@ -142,12 +181,13 @@ class _TablePedidosState extends State<TablePedidos> {
                           margin: const EdgeInsets.all(15),
                           child: ListTile(
                             title: Text(
-                              'Mesa: ' +
-                                  (_pedidosEsperando[index]['prato']),
+                              (_pedidosEsperando[index]['prato'].toString()),
                               style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
-                              ((_pedidosEsperando[index]['idMesa']).toString()),
+                              'Mesa: ' +
+                                  ((_pedidosEsperando[index]['idMesa'])
+                                      .toString()),
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -168,12 +208,13 @@ class _TablePedidosState extends State<TablePedidos> {
                           margin: const EdgeInsets.all(15),
                           child: ListTile(
                             title: Text(
-                              'Mesa: ' +
-                                  (_pedidosPronto[index]['prato']),
+                              (_pedidosPronto[index]['prato']),
                               style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
-                              ((_pedidosPronto[index]['idMesa']).toString()),
+                              'Mesa: ' +
+                                  ((_pedidosPronto[index]['idMesa'])
+                                      .toString()),
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -194,12 +235,13 @@ class _TablePedidosState extends State<TablePedidos> {
                           margin: const EdgeInsets.all(15),
                           child: ListTile(
                             title: Text(
-                              'Mesa: ' +
-                                  (_pedidosEntregue[index]['prato']),
+                              (_pedidosEntregue[index]['prato']),
                               style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
-                              ((_pedidosEntregue[index]['idMesa']).toString()),
+                              'Mesa: ' +
+                                  ((_pedidosEntregue[index]['idMesa'])
+                                      .toString()),
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
