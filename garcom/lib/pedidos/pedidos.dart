@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:garcom/controllers/pedido_service.dart';
 import 'package:garcom/controllers/prato_service.dart';
+import 'package:garcom/login/login.dart';
 import 'package:garcom/models/pedido_model.dart';
-import 'package:garcom/models/prato_model.dart';
 
 class TablePedidos extends StatefulWidget {
   const TablePedidos({Key? key}) : super(key: key);
@@ -17,30 +16,36 @@ class _TablePedidosState extends State<TablePedidos> {
   List<Map<String, dynamic>> _pedidosPronto = [];
   List<Map<String, dynamic>> _pedidosEntregue = [];
   List<Map<String, dynamic>> _pratos = [];
+  static List<String> list = ["Selecione o prato"];
   bool _carregando = true;
   Pedido pedido = Pedido(0, 0, "", "esperando");
   final TextEditingController _mesaController = TextEditingController();
-  final TextEditingController _produtoController = TextEditingController();
-
+  String _produto = "";
+  String dropdownValue = list.first;
   void telaToPedido() {
+    if (_mesaController.text == "") {
+      return;
+    }
     pedido = Pedido(
       0,
       int.parse(_mesaController.text),
-      _produtoController.text,
+      _produto,
       "esperando",
     );
   }
 
   void _listaPratos() async {
+    list = ["Selecione o prato"];
     _pratos = [];
     final data = await PratoService.listaPratos();
     setState(() {
       for (var p in data) {
-        _pedidosEsperando.add(<String, dynamic>{
+        _pratos.add(<String, dynamic>{
           "id": p.id,
           "nome": p.nome,
           "preco": p.preco,
         });
+        list.add(p.nome.toString());
       }
     });
   }
@@ -95,6 +100,12 @@ class _TablePedidosState extends State<TablePedidos> {
 
   Future<void> pedir() async {
     telaToPedido();
+    if (pedido.prato == "" || pedido.prato == "Selecione o prato") {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Não foi possível pedir!'),
+      ));
+      return;
+    }
     bool inserindo = await PedidoService.insere(pedido);
     if (inserindo) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -110,7 +121,8 @@ class _TablePedidosState extends State<TablePedidos> {
     _listaPedidosPronto();
     _listaPedidosEntregue();
     _mesaController.text = '';
-    _produtoController.text = '';
+    _produto = '';
+    dropdownValue = list.first;
   }
 
   @override
@@ -145,6 +157,16 @@ class _TablePedidosState extends State<TablePedidos> {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Atualizado com sucesso!'),
                 ));
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/login', (Route<dynamic> route) => false);
               },
             )
           ],
@@ -182,13 +204,13 @@ class _TablePedidosState extends State<TablePedidos> {
                           child: ListTile(
                             title: Text(
                               (_pedidosEsperando[index]['prato'].toString()),
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
                               'Mesa: ' +
                                   ((_pedidosEsperando[index]['idMesa'])
                                       .toString()),
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
@@ -209,13 +231,13 @@ class _TablePedidosState extends State<TablePedidos> {
                           child: ListTile(
                             title: Text(
                               (_pedidosPronto[index]['prato']),
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
                               'Mesa: ' +
                                   ((_pedidosPronto[index]['idMesa'])
                                       .toString()),
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
@@ -236,13 +258,13 @@ class _TablePedidosState extends State<TablePedidos> {
                           child: ListTile(
                             title: Text(
                               (_pedidosEntregue[index]['prato']),
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
                               'Mesa: ' +
                                   ((_pedidosEntregue[index]['idMesa'])
                                       .toString()),
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
@@ -282,10 +304,9 @@ class _TablePedidosState extends State<TablePedidos> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
-                    child: TextField(
-                      controller: _produtoController,
+                    child: DropdownButtonFormField<String>(
                       decoration: const InputDecoration(
-                        hintText: 'Produto',
+                        hintText: 'Mesa',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(100),
@@ -295,6 +316,23 @@ class _TablePedidosState extends State<TablePedidos> {
                           ),
                         ),
                       ),
+                      value: dropdownValue,
+                      icon: const Icon(Icons.arrow_downward),
+                      elevation: 16,
+                      isExpanded: true,
+                      onChanged: (String? value) {
+                        // This is called when the user selects an item.
+                        setState(() {
+                          dropdownValue = value!;
+                          _produto = dropdownValue;
+                        });
+                      },
+                      items: list.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
                     ),
                   ),
                   ElevatedButton(
@@ -303,11 +341,11 @@ class _TablePedidosState extends State<TablePedidos> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       child: Text(
-                        'Login',
+                        'Pedir',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: const Color(0XFFffffff),
+                          color: Color(0XFFffffff),
                         ),
                       ),
                     ),

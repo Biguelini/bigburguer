@@ -1,10 +1,5 @@
-import 'dart:developer';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:garcom/controllers/garcom_service.dart';
 import 'package:garcom/models/garcom_model.dart';
 
@@ -17,15 +12,18 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   Garcom garcom = Garcom("", "", "", "", "");
-  final bool _carregando = true;
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
-  Future<void> logar() async {
+  Future<Object> logar() async {
     garcom.login = _loginController.text;
     garcom.senha = _senhaController.text;
-    return await GarcomService.login(garcom)
-        ? print('não deu')
-        : Navigator.pushNamed(context, '/pedidos');
+    if (await GarcomService.login(garcom)) {
+      return ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Login e/ou senha incorretos!'),
+      ));
+    } else {
+      return Navigator.pushNamed(context, '/pedidos');
+    }
   }
 
   @override
@@ -39,7 +37,7 @@ class _LoginState extends State<Login> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color(0XFF191919),
+                color: const Color(0XFF191919),
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Padding(
@@ -103,7 +101,7 @@ class _LoginState extends State<Login> {
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: const Color(0XFFffffff),
+                            color: Color(0XFFffffff),
                           ),
                         ),
                       ),

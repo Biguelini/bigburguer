@@ -62,7 +62,6 @@ class PedidoService {
         body: jsonEncode(pedido),
       );
 
-      print(response.statusCode);
       return response.statusCode == 200 ? true : false;
     } catch (e) {
       throw Exception("Erro ao carregar inserir " + e.toString());
