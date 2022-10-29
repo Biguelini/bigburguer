@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:garcom/controllers/pedido_service.dart';
 import 'package:garcom/controllers/prato_service.dart';
-import 'package:garcom/login/login.dart';
 import 'package:garcom/models/pedido_model.dart';
 
 class TablePedidos extends StatefulWidget {
