@@ -1,9 +1,7 @@
 package bigburguer.admin.controller;
 
 
-import bigburguer.admin.model.GarcomModel;
 import bigburguer.admin.model.PedidoModel;
-import bigburguer.admin.model.PratoModel;
 import bigburguer.admin.repository.PedidoRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -47,6 +46,18 @@ public class PedidoController {
         }
 
 
+
+    }
+    @GetMapping("/admin/pedidos/atualizaStatus/{id}")
+    public Optional<PedidoModel> atualizaStatus(@PathVariable Integer id) {
+
+        return repository.findById(id)
+                .map(p-> {
+                    if(p.getStatus().equals("esperando")){
+                        p.setStatus("pronto");
+                    }
+                    return repository.save(p);
+                });
 
     }
 }

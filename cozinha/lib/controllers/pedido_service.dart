@@ -36,14 +36,13 @@ class PedidoService {
     }
   }
 
-  static Future<List<Pedido>> listaPedidosEntregue() async {
+
+
+  static Future<bool> atualizaStatus(id) async {
     try {
-      List<Pedido> listaPedido = [];
-      final response = await http.get(Uri.parse('$url/entregue'));
+      final response = await http.get(Uri.parse('$url/atualizaStatus/$id'));
       if (response.statusCode == 200) {
-        var decodeJson = jsonDecode(response.body);
-        decodeJson.forEach((item) => listaPedido.add(Pedido.fromJson(item)));
-        return listaPedido;
+        return true;
       } else {
         throw Exception("Erro ao carregar dados 1");
       }
@@ -51,20 +50,5 @@ class PedidoService {
       throw Exception("Erro ao carregar dados 2 $e");
     }
   }
-
-  static Future<bool> insere(Pedido pedido) async {
-    try {
-      final response = await http.post(
-        Uri.parse(url),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(pedido),
-      );
-
-      return response.statusCode == 200 ? true : false;
-    } catch (e) {
-      throw Exception("Erro ao carregar inserir $e");
-    }
-  }
+  
 }

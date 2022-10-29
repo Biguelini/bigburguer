@@ -11,7 +11,6 @@ class TablePedidos extends StatefulWidget {
 class _TablePedidosState extends State<TablePedidos> {
   List<Map<String, dynamic>> _pedidosEsperando = [];
   List<Map<String, dynamic>> _pedidosPronto = [];
-  List<Map<String, dynamic>> _pedidosEntregue = [];
   bool _carregando = true;
 
   void _listaPedidosEsperando() async {
@@ -46,20 +45,13 @@ class _TablePedidosState extends State<TablePedidos> {
     });
   }
 
-  void _listaPedidosEntregue() async {
-    _pedidosEntregue = [];
-    final data = await PedidoService.listaPedidosEntregue();
-    setState(() {
-      for (var p in data) {
-        _pedidosEntregue.add(<String, dynamic>{
-          "id": p.id,
-          "idMesa": p.idMesa,
-          "prato": p.prato,
-          "status": p.status
-        });
-      }
-      _carregando = false;
-    });
+  Future<void> atualizarStatus(id) async {
+    bool atualizou;
+    atualizou = await PedidoService.atualizaStatus(id);
+    if (atualizou) {
+      _listaPedidosEsperando();
+      _listaPedidosPronto();
+    }
   }
 
   @override
@@ -67,13 +59,12 @@ class _TablePedidosState extends State<TablePedidos> {
     super.initState();
     _listaPedidosEsperando();
     _listaPedidosPronto();
-    _listaPedidosEntregue();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -88,7 +79,6 @@ class _TablePedidosState extends State<TablePedidos> {
                 _carregando = true;
                 _listaPedidosEsperando();
                 _listaPedidosPronto();
-                _listaPedidosEntregue();
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Atualizado com sucesso!'),
                 ));
@@ -113,12 +103,6 @@ class _TablePedidosState extends State<TablePedidos> {
               ),
               Tab(
                 text: 'Pronto',
-              ),
-              Tab(
-                text: 'Entregue',
-              ),
-              Tab(
-                text: 'Pedir',
               ),
             ],
           ),
@@ -145,6 +129,19 @@ class _TablePedidosState extends State<TablePedidos> {
                               'Mesa: ${_pedidosEsperando[index]['idMesa']}',
                               style: const TextStyle(color: Colors.white),
                             ),
+                            trailing: SizedBox(
+                              width: 100,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () => {
+                                  atualizarStatus(
+                                      _pedidosEsperando[index]['id'])
+                                },
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -168,31 +165,6 @@ class _TablePedidosState extends State<TablePedidos> {
                             ),
                             subtitle: Text(
                               'Mesa: ${_pedidosPronto[index]['idMesa']}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-            ),
-            Container(
-              child: _carregando
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: ListView.builder(
-                        itemCount: _pedidosEntregue.length,
-                        itemBuilder: (context, index) => Card(
-                          margin: const EdgeInsets.all(15),
-                          child: ListTile(
-                            title: Text(
-                              (_pedidosEntregue[index]['prato']),
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                            subtitle:  Text(
-                              'Mesa: ${_pedidosEntregue[index]['idMesa']}',
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
