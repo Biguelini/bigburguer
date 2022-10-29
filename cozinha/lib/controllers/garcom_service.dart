@@ -16,7 +16,7 @@ class GarcomService {
       );
       return response.statusCode == 200 ? false : true;
     } catch (e) {
-      throw Exception("Erro ao carregar inserir " + e.toString());
+      throw Exception("Erro ao carregar inserir $e");
     }
   }
 }
