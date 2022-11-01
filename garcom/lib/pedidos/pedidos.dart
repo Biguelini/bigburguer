@@ -33,6 +33,16 @@ class _TablePedidosState extends State<TablePedidos> {
     );
   }
 
+  Future<void> atualizarStatus(id) async {
+    bool atualizou;
+    atualizou = await PedidoService.atualizaStatus(id);
+    print(atualizou);
+    if (atualizou) {
+      _listaPedidosEsperando();
+      _listaPedidosPronto();
+    }
+  }
+
   void _listaPratos() async {
     list = ["Selecione o prato"];
     _pratos = [];
@@ -237,6 +247,18 @@ class _TablePedidosState extends State<TablePedidos> {
                                   ((_pedidosPronto[index]['idMesa'])
                                       .toString()),
                               style: const TextStyle(color: Colors.white),
+                            ),
+                            trailing: SizedBox(
+                              width: 100,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () => {
+                                  atualizarStatus(_pedidosPronto[index]['id'])
+                                },
+                              ),
                             ),
                           ),
                         ),

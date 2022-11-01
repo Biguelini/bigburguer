@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:garcom/models/prato_model.dart';
 
 class PratoService {
-  static const url = "http://192.168.1.11:8080/admin/pratos";
+  static const url = "http://192.168.198.118:8080/admin/pratos";
   static Future<List<Prato>> listaPratos() async {
     try {
       List<Prato> listaPrato = [];

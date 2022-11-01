@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PedidoService {
-  static const url = "http://192.168.1.11:8080/admin/pedidos";
+  static const url = "http://192.168.198.118:8080/admin/pedidos";
   static Future<List<Pedido>> listaPedidosEsperando() async {
     try {
       List<Pedido> listaPedido = [];
@@ -65,6 +65,18 @@ class PedidoService {
       return response.statusCode == 200 ? true : false;
     } catch (e) {
       throw Exception("Erro ao carregar inserir " + e.toString());
+    }
+  }
+  static Future<bool> atualizaStatus(id) async {
+    try {
+      final response = await http.get(Uri.parse('$url/atualizaStatus/$id'));
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw Exception("Erro ao carregar dados 1");
+      }
+    } catch (e) {
+      throw Exception("Erro ao carregar dados 2 $e");
     }
   }
 }

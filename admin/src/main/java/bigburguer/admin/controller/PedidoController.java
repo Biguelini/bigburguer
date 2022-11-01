@@ -53,9 +53,15 @@ public class PedidoController {
 
         return repository.findById(id)
                 .map(p-> {
+                    if(p.getStatus().equals("pronto")){
+                        p.setStatus("entregue");
+                        return repository.save(p);
+                    }
                     if(p.getStatus().equals("esperando")){
                         p.setStatus("pronto");
+                        return repository.save(p);
                     }
+
                     return repository.save(p);
                 });
 
