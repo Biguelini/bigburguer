@@ -14,6 +14,7 @@ class _TablePedidosState extends State<TablePedidos> {
   List<Map<String, dynamic>> _pedidosEsperando = [];
   List<Map<String, dynamic>> _pedidosPronto = [];
   List<Map<String, dynamic>> _pedidosEntregue = [];
+  List<Map<String, dynamic>> _pedidosCancelados = [];
   List<Map<String, dynamic>> _pratos = [];
   static List<String> list = ["Selecione o prato"];
   bool _carregando = true;
@@ -40,6 +41,20 @@ class _TablePedidosState extends State<TablePedidos> {
     if (atualizou) {
       _listaPedidosEsperando();
       _listaPedidosPronto();
+      _listaPedidosEntregue();
+      _listaPedidosCancelados();
+    }
+  }
+
+  Future<void> cancelar(id) async {
+    bool atualizou;
+    atualizou = await PedidoService.cancelar(id);
+    print(atualizou);
+    if (atualizou) {
+      _listaPedidosEsperando();
+      _listaPedidosPronto();
+      _listaPedidosEntregue();
+      _listaPedidosCancelados();
     }
   }
 
@@ -107,6 +122,22 @@ class _TablePedidosState extends State<TablePedidos> {
     });
   }
 
+  void _listaPedidosCancelados() async {
+    _pedidosCancelados = [];
+    final data = await PedidoService.listaPedidosCancelados();
+    setState(() {
+      for (var p in data) {
+        _pedidosCancelados.add(<String, dynamic>{
+          "id": p.id,
+          "idMesa": p.idMesa,
+          "prato": p.prato,
+          "status": p.status
+        });
+      }
+      _carregando = false;
+    });
+  }
+
   Future<void> pedir() async {
     telaToPedido();
     if (pedido.prato == "" || pedido.prato == "Selecione o prato") {
@@ -129,6 +160,7 @@ class _TablePedidosState extends State<TablePedidos> {
     _listaPedidosEsperando();
     _listaPedidosPronto();
     _listaPedidosEntregue();
+    _listaPedidosCancelados();
     _mesaController.text = '';
     _produto = '';
     dropdownValue = list.first;
@@ -140,13 +172,14 @@ class _TablePedidosState extends State<TablePedidos> {
     _listaPedidosEsperando();
     _listaPedidosPronto();
     _listaPedidosEntregue();
+    _listaPedidosCancelados();
     _listaPratos();
   }
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 5,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -162,6 +195,7 @@ class _TablePedidosState extends State<TablePedidos> {
                 _listaPedidosEsperando();
                 _listaPedidosPronto();
                 _listaPedidosEntregue();
+                _listaPedidosCancelados();
                 _listaPratos();
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text('Atualizado com sucesso!'),
@@ -192,6 +226,9 @@ class _TablePedidosState extends State<TablePedidos> {
                 text: 'Entregue',
               ),
               Tab(
+                text: 'Cancelados',
+              ),
+              Tab(
                 text: 'Pedir',
               ),
             ],
@@ -220,6 +257,17 @@ class _TablePedidosState extends State<TablePedidos> {
                                   ((_pedidosEsperando[index]['idMesa'])
                                       .toString()),
                               style: const TextStyle(color: Colors.white),
+                            ),
+                            trailing: SizedBox(
+                              width: 100,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                ),
+                                onPressed: () =>
+                                    {cancelar(_pedidosEsperando[index]['id'])},
+                              ),
                             ),
                           ),
                         ),
@@ -284,6 +332,33 @@ class _TablePedidosState extends State<TablePedidos> {
                             subtitle: Text(
                               'Mesa: ' +
                                   ((_pedidosEntregue[index]['idMesa'])
+                                      .toString()),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+            ),
+            Container(
+              child: _carregando
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: ListView.builder(
+                        itemCount: _pedidosCancelados.length,
+                        itemBuilder: (context, index) => Card(
+                          margin: const EdgeInsets.all(15),
+                          child: ListTile(
+                            title: Text(
+                              (_pedidosCancelados[index]['prato']),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                              'Mesa: ' +
+                                  ((_pedidosCancelados[index]['idMesa'])
                                       .toString()),
                               style: const TextStyle(color: Colors.white),
                             ),

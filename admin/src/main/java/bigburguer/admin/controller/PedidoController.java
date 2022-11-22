@@ -65,20 +65,17 @@ public class PedidoController {
 
         return repository.findById(id)
                 .map(p-> {
-                    if(p.getStatus().equals("pronto")){
-                        p.setStatus("entregue");
-                        return repository.save(p);
-                    }
                     if(p.getStatus().equals("esperando")){
                         p.setStatus("em preparo");
+                        return repository.save(p);
                     }
                     if(p.getStatus().equals("em preparo")){
                         p.setStatus("pronto");
                         return repository.save(p);
                     }
-<<<<<<< HEAD
                     if(p.getStatus().equals("pronto")){
                         p.setStatus("entregue");
+                        return repository.save(p);
                     }
                     return repository.save(p);
                 });
@@ -90,10 +87,9 @@ public class PedidoController {
         return repository.findById(id)
                 .map(p-> {
                     p.setStatus("cancelado");
-=======
-
->>>>>>> e78e5cfe4e92a355aeb195bfc8b1e3461d109689
+                    System.out.println("cancelou");
                     return repository.save(p);
+
                 });
 
     }

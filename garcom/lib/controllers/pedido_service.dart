@@ -54,6 +54,22 @@ class PedidoService {
     }
   }
 
+  static Future<List<Pedido>> listaPedidosCancelados() async {
+    try {
+      List<Pedido> listaPedido = [];
+      final response = await http.get(Uri.parse(url + '/cancelados'));
+      if (response.statusCode == 200) {
+        var decodeJson = jsonDecode(response.body);
+        decodeJson.forEach((item) => listaPedido.add(Pedido.fromJson(item)));
+        return listaPedido;
+      } else {
+        throw Exception("Erro ao carregar dados 1");
+      }
+    } catch (e) {
+      throw Exception("Erro ao carregar dados 2 " + e.toString());
+    }
+  }
+
   static Future<bool> insere(Pedido pedido) async {
     try {
       final response = await http.post(
@@ -69,9 +85,23 @@ class PedidoService {
       throw Exception("Erro ao carregar inserir " + e.toString());
     }
   }
+
   static Future<bool> atualizaStatus(id) async {
     try {
       final response = await http.get(Uri.parse('$url/atualizaStatus/$id'));
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        throw Exception("Erro ao carregar dados 1");
+      }
+    } catch (e) {
+      throw Exception("Erro ao carregar dados 2 $e");
+    }
+  }
+
+  static Future<bool> cancelar(id) async {
+    try {
+      final response = await http.get(Uri.parse('$url/cancelar/$id'));
       if (response.statusCode == 200) {
         return true;
       } else {
