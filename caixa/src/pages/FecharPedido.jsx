@@ -4,31 +4,50 @@ import './FecharPedido.css'
 export function FecharPedido() {
     const [pedidoFechado, setPedidoFechado] = useState(false)
     const [valor, setValor] = useState(0)
+    const [mesa, setMesa] = useState(0)
     const fecharPedido = () => {
+        setValor('Esta mesa não tem pedidos')
         setPedidoFechado(true)
-        console.log(valor)
+        let dinheiro = 0
         axios
             .get('http://localhost:8080/admin/pedidos/')
             .then(function (response) {
-                let dinheiro = 0
                 const pedidos = response.data
                 pedidos.map((pedido) => {
-                    if (pedido.idMesa === 4) {
+                    if (pedido.idMesa === parseInt(mesa)) {
                         if (
                             pedido.status !== 'cancelado' &&
                             pedido.status !== 'pago'
                         ) {
-                            dinheiro += 25
+                            axios
+                                .get('http://localhost:8080/admin/pratos/')
+                                .then(function (response) {
+                                    const pratos = response.data
+                                    pratos.map((prato) => {
+                                        if (prato.nome === pedido.prato) {
+                                            dinheiro += prato.preco
+                                            return setValor(
+                                                'Total: R$ ' + dinheiro
+                                            )
+                                        }
+                                        return ''
+                                    })
+                                })
+
+                                .catch(function (error) {
+                                    console.error(error)
+                                })
                         }
                     }
                     return ''
                 })
-                setValor(dinheiro)
             })
             .catch(function (error) {
                 console.error(error)
             })
-        setValor(20)
+    }
+    const changeMesa = (e) => {
+        setMesa(e.target.value)
     }
     useEffect(() => {
         console.log(pedidoFechado)
@@ -38,7 +57,7 @@ export function FecharPedido() {
             <div className="adminForm">
                 <h1>Fechar pedido</h1>
                 <label htmlFor="usuario">Mesa</label>
-                <input type="number" />
+                <input type="number" value={mesa} onChange={changeMesa} />
                 <button
                     onClick={() => {
                         fecharPedido()
@@ -47,7 +66,7 @@ export function FecharPedido() {
                     Fechar Pedido
                 </button>
             </div>
-            {pedidoFechado ? <p>Total: R$ {valor}</p> : <></>}
+            {pedidoFechado ? <p className="total"> {valor}</p> : <></>}
         </>
     )
 }
