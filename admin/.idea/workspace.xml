@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d33b5e1-4ce5-4c74-8296-b785fb7608e9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PedidoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bigburguer/admin/controller/PedidoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../cozinha/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../cozinha/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/components/Header.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/components/Header.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/main/App.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/main/Routes.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/pages/FecharPedido.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/pages/FecharPedido.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/pages/Login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cozinha/src/pages/Login.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../garcom/lib/controllers/pedido_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../garcom/lib/controllers/pedido_service.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../garcom/lib/pedidos/pedidos.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../garcom/lib/pedidos/pedidos.dart" afterDir="false" />
-    </list>
+    <list default="true" id="4d33b5e1-4ce5-4c74-8296-b785fb7608e9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
