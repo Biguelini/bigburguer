@@ -1,9 +1,10 @@
 import 'package:garcom/models/pedido_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import './url.dart';
 
 class PedidoService {
-  static const url = "http://192.168.1.11:8080/admin/pedidos";
+  static const url = "http://" + urlip + ":8080/admin/pedidos";
   static Future<List<Pedido>> listaPedidosEsperando() async {
     try {
       List<Pedido> listaPedido = [];

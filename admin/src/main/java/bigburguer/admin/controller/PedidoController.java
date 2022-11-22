@@ -36,6 +36,18 @@ public class PedidoController {
 
         return (List<PedidoModel>) repository.filterStatus("entregue");
     }
+    @GetMapping(path = "/admin/pedidos/empreparo")
+    public List<PedidoModel> pedidosEmPreparo() {
+
+        return (List<PedidoModel>) repository.filterStatus("em preparo");
+    }
+
+    @GetMapping(path = "/admin/pedidos/cancelados")
+    public List<PedidoModel> pedidosCancelados() {
+
+        return (List<PedidoModel>) repository.filterStatus("cancelado");
+    }
+
     @PostMapping(path = "/admin/pedidos")
     public ResponseEntity salvar(@RequestBody @NotNull PedidoModel pedido) {
         try{
@@ -54,8 +66,24 @@ public class PedidoController {
         return repository.findById(id)
                 .map(p-> {
                     if(p.getStatus().equals("esperando")){
+                        p.setStatus("em preparo");
+                    }
+                    if(p.getStatus().equals("em preparo")){
                         p.setStatus("pronto");
                     }
+                    if(p.getStatus().equals("pronto")){
+                        p.setStatus("entregue");
+                    }
+                    return repository.save(p);
+                });
+
+    }
+    @GetMapping("/admin/pedidos/cancelar/{id}")
+    public Optional<PedidoModel> cancelarPedido(@PathVariable Integer id) {
+
+        return repository.findById(id)
+                .map(p-> {
+                    p.setStatus("cancelado");
                     return repository.save(p);
                 });
 
