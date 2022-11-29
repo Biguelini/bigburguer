@@ -1,5 +1,6 @@
-import React,{ useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import './Login.css'
 export function Login() {
     const [usuario, setUsuario] = useState('')
@@ -14,22 +15,40 @@ export function Login() {
     const changeSenha = (e) => {
         setSenha(e.target.value)
     }
-    const login = ()=>{
-        if(usuario === 'admin' && senha === 'admin'){
-            return goTo('/pratos')
-        }
-        console.log(usuario, senha)
+    const login = () => {
+        axios
+            .post('http://localhost:8080/caixa/login', {
+                login: usuario,
+                senha: senha,
+                nome: '',
+                telefone: '',
+                cpf: '',
+            })
+            .then((reponse) => {
+                console.log(reponse.data)
+                if (reponse.data === 'ok') {
+                    return goTo('/fecharPedido')
+                } else {
+                    alert('usuário ou senha incorretos')
+                }
+            })
     }
     return (
         <>
-            <form className="adminForm">
+            <div className="adminForm">
                 <h3>Login Caixa</h3>
                 <label htmlFor="usuario">Usuário</label>
                 <input type="text" value={usuario} onChange={changeUsuario} />
                 <label htmlFor="senha">Senha</label>
                 <input type="text" value={senha} onChange={changeSenha} />
-                <button onClick={()=>{login()}}>Login</button>
-            </form>
+                <button
+                    onClick={() => {
+                        login()
+                    }}
+                >
+                    Login
+                </button>
+            </div>
         </>
     )
 }

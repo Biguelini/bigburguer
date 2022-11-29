@@ -94,4 +94,20 @@ public class GarcomController {
         }
         return ResponseEntity.notFound().build();
     }
+    @PostMapping(path = "/caixa/login")
+    public ResponseEntity loginCaixa(@RequestBody @NotNull GarcomModel garcom) {
+        System.out.println("oi");
+        for (GarcomModel g : repository.findAll()) {
+            if (g.getLogin().equals(garcom.getLogin())) {
+                if (g.getSenha().equals((garcom.getSenha()))) {
+                    if(g.getCargo().equals("caixa")){
+                        return ResponseEntity.ok().body("ok");
+                    }
+
+                }
+
+            }
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
