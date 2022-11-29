@@ -36,7 +36,7 @@ export function Login() {
     return (
         <>
             <div className="adminForm">
-                <h3>Login Caixa</h3>
+                <h3>Login Caixa Big Burguer</h3>
                 <label htmlFor="usuario">Usuário</label>
                 <input type="text" value={usuario} onChange={changeUsuario} />
                 <label htmlFor="senha">Senha</label>
