@@ -6,6 +6,7 @@ export function FecharPedido() {
     const [pratos, setPratos] = useState([])
     const [valor, setValor] = useState(0)
     const [mesa, setMesa] = useState(0)
+    const [ativo, setAtivo] = useState('Ver Pedido')
     const fecharPedido = () => {
         setValor('Esta mesa não tem pedidos')
         setPedidoFechado(true)
@@ -15,6 +16,9 @@ export function FecharPedido() {
         axios
             .get('http://localhost:8080/admin/pedidos/')
             .then(function (response) {
+                console.log(
+                    'Ativo?' + (ativo.toString() === 'Ver Pedido').toString()
+                )
                 const pedidos = response.data
                 pedidos.map((pedido) => {
                     if (pedido.idMesa === parseInt(mesa)) {
@@ -22,6 +26,7 @@ export function FecharPedido() {
                             pedido.status !== 'cancelado' &&
                             pedido.status !== 'pago'
                         ) {
+                            console.log(pedido.prato)
                             axios
                                 .get('http://localhost:8080/admin/pratos/')
                                 .then(function (response) {
@@ -40,9 +45,30 @@ export function FecharPedido() {
                                                 'Total: R$ ' + dinheiro
                                             )
                                         }
+                                        setAtivo('Fechar Pedido')
                                         setPratos(listaPratos)
                                         return ''
                                     })
+                                })
+                                .then(() => {
+                                    setAtivo('Fechar Pedido')
+                                    console.log('Ativo aqui' + ativo.toString())
+                                    if (ativo.toString() === 'Fechar Pedido') {
+                                        console.log(
+                                            'http://localhost:8080/admin/pedidos/atualizaStatus/' +
+                                                pedido.id
+                                        )
+                                        axios
+                                            .get(
+                                                'http://localhost:8080/admin/pedidos/atualizaStatus/' +
+                                                    pedido.id
+                                            )
+                                            .then(() => {
+                                                setAtivo('Ver Pedido')
+                                            })
+                                        setValor('Pedido da mesa fechado')
+                                        setPratos([])
+                                    }
                                 })
 
                                 .catch(function (error) {
@@ -74,7 +100,7 @@ export function FecharPedido() {
                         fecharPedido()
                     }}
                 >
-                    Fechar Pedido
+                    {ativo}
                 </button>
             </div>
             {pedidoFechado ? <p className="total"> {valor}</p> : <></>}

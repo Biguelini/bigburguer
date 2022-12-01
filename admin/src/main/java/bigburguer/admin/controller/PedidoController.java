@@ -77,6 +77,11 @@ public class PedidoController {
                         p.setStatus("entregue");
                         return repository.save(p);
                     }
+                    if(p.getStatus().equals("entregue")){
+                        System.out.println("opa");
+                        p.setStatus("pago");
+                        return repository.save(p);
+                    }
                     return repository.save(p);
                 });
 
